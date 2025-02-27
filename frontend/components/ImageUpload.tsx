@@ -1,6 +1,7 @@
 import { Box, useTheme } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDropzone, DropzoneOptions } from "react-dropzone";
+import { useTranslation } from "react-i18next";
 
 interface ImageUploadProps {
   onFileSelect: (file: File | null) => void;
@@ -13,6 +14,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
 }) => {
   const [image, setImage] = useState<File | null>(null);
   const theme = useTheme();
+  const { t } = useTranslation("common");
 
   const dropzoneStyle = {
     border: "2px dashed #ccc",
@@ -61,9 +63,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
   } as unknown as DropzoneOptions);
 
   return (
-    <Box sx={{marginTop: "12px", marginBottom: "40px"}}>
+    <Box sx={{ marginTop: "12px", marginBottom: "40px" }}>
       <Box {...getRootProps()} sx={{ ...dropzoneStyle }}>
-        <input {...getInputProps()} onChange={onFileChange} required={!initialImage} />
+        <input
+          {...getInputProps()}
+          onChange={onFileChange}
+          required={!initialImage}
+        />
         {image ? (
           <Box sx={{ width: "100%", height: "100%" }}>
             <img
@@ -83,7 +89,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
         ) : (
           <Box>
             <img src="/file_download_black_24dp_1.png" />
-            <p>Drop an image here</p>
+            <p>{t("drop-image")}</p>
           </Box>
         )}
       </Box>

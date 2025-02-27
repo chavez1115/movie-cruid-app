@@ -8,11 +8,13 @@ import CustomCheckbox from "@/components/CustomCheckbox";
 import ButtonComponent from "@/components/Button";
 import Layout from "@/components/Layout";
 import { Box, Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const { user, signIn } = useAuth();
   const router = useRouter();
   const theme = useTheme();
+  const { t } = useTranslation("common");
 
   const {
     register,
@@ -61,11 +63,11 @@ const Login = () => {
           component="div"
           gutterBottom
         >
-          Sign in
+          {t("signin")}
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
-            label="Email"
+            label={t("email")}
             type="email"
             name="email"
             control={control}
@@ -75,7 +77,7 @@ const Login = () => {
             required
           />
           <Input
-            label="Password"
+            label={t("password")}
             type="password"
             name="password"
             control={control}
@@ -84,10 +86,10 @@ const Login = () => {
             sx={{ width: { sm: "300px", xs: "380px" }, height: "54px" }}
             required
           />
-          <CustomCheckbox label="Remember me" />
+          <CustomCheckbox label={t("remember-me")} />
           <ButtonComponent
             type="submit"
-            label="Login"
+            label={t("login")}
             sx={{
               marginTop: "24px",
               width: { sm: "300px", xs: "380px" },
