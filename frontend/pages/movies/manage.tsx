@@ -7,6 +7,8 @@ import ImageUpload from "@/components/ImageUpload";
 import withAuth from "@/utils/withAuth";
 import { useRouter } from "next/router";
 import { Box, Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import Layout from "@/components/Layout";
 
 const ManageMovie = () => {
   const [file, setFile] = useState<any>(null);
@@ -17,6 +19,7 @@ const ManageMovie = () => {
   const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
   const theme = useTheme();
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1035);
+  const { t, i18n } = useTranslation("common");
 
   useEffect(() => {
     const updateIsMobile = () => {
@@ -89,138 +92,143 @@ const ManageMovie = () => {
   };
 
   return (
-    <Box>
-      {!isMobile ? (
-        <Box className="manage-movie">
-          <Typography
-            component="div"
-            sx={{
-              fontSize: theme.typography.h2.fontSize,
-              lineHeight: theme.typography.h2.lineHeight,
-            }}
-          >
-            {movieId ? "Edit" : "Create a New Movie"}
-          </Typography>
-          <form onSubmit={handleSubmit(onSubmit)} className="manage-movie-form">
-            <ImageUpload
-              onFileSelect={handleFileSelect}
-              initialImage={
-                movieId && movie
-                  ? backend_url + "/uploads/posters/" + movie.poster
-                  : undefined
-              }
-            />
-            <Box className="right-pane">
+    <Layout>
+      <Box>
+        {!isMobile ? (
+          <Box className="manage-movie">
+            <Typography
+              component="div"
+              sx={{
+                fontSize: theme.typography.h2.fontSize,
+                lineHeight: theme.typography.h2.lineHeight,
+              }}
+            >
+              {movieId ? t("edit") : t("create-movie")}
+            </Typography>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="manage-movie-form"
+            >
+              <ImageUpload
+                onFileSelect={handleFileSelect}
+                initialImage={
+                  movieId && movie
+                    ? backend_url + "/uploads/posters/" + movie.poster
+                    : undefined
+                }
+              />
+              <Box className="right-pane">
+                <Input
+                  label={t("title")}
+                  type="string"
+                  name="title"
+                  value={movie ? movie.title : ""}
+                  control={control}
+                  register={register}
+                  required
+                  sx={{ width: "362px" }}
+                />
+                <Box style={{ width: "200px", textAlign: "left" }}>
+                  <Input
+                    label={t("year")}
+                    type="number"
+                    name="year"
+                    value={movie ? movie.year : ""}
+                    control={control}
+                    register={register}
+                    required
+                    sx={{
+                      width: "216px",
+                      textAlign: "left",
+                    }}
+                  />
+                </Box>
+                <Box
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    marginTop: "54px",
+                  }}
+                >
+                  <ButtonComponent
+                    type="button"
+                    label="Cancel"
+                    outlined
+                    onClick={onCancel}
+                    sx={{ width: "179px", height: "56px" }}
+                  />
+                  <ButtonComponent
+                    type="submit"
+                    label={movieId ? t("update") : t("submit")}
+                    sx={{ width: "179px", height: "56px" }}
+                  />
+                </Box>
+              </Box>
+            </form>
+          </Box>
+        ) : (
+          <Box className="manage-movie-mobile">
+            <Typography
+              component="div"
+              sx={{
+                fontSize: theme.typography.h3.fontSize,
+                lineHeight: theme.typography.h3.lineHeight,
+              }}
+              className="title"
+            >
+              {movieId ? t("edit") : t("create-movie")}
+            </Typography>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="manage-movie-mobile-form"
+            >
               <Input
-                label="Title"
+                label={t("Title")}
                 type="string"
                 name="title"
                 value={movie ? movie.title : ""}
                 control={control}
                 register={register}
                 required
-                sx={{ width: "362px" }}
+                sx={{ width: "100%" }}
               />
-              <Box style={{ width: "200px", textAlign: "left" }}>
-                <Input
-                  label="Publishing Year"
-                  type="number"
-                  name="year"
-                  value={movie ? movie.year : ""}
-                  control={control}
-                  register={register}
-                  required
-                  sx={{
-                    width: "216px",
-                    textAlign: "left",
-                  }}
-                />
-              </Box>
-              <Box
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginTop: "54px",
-                }}
-              >
+              <Input
+                label={t("year")}
+                type="number"
+                name="year"
+                value={movie ? movie.year : ""}
+                control={control}
+                register={register}
+                required
+                sx={{ width: "100%" }}
+              />
+              <ImageUpload
+                onFileSelect={handleFileSelect}
+                initialImage={
+                  movieId && movie
+                    ? backend_url + "/uploads/posters/" + movie.poster
+                    : undefined
+                }
+              />
+              <Box className="button-group">
                 <ButtonComponent
                   type="button"
                   label="Cancel"
                   outlined
                   onClick={onCancel}
-                  sx={{ width: "179px", height: "56px" }}
+                  sx={{ width: "182px", height: "56px" }}
                 />
                 <ButtonComponent
                   type="submit"
-                  label={movieId ? "Update" : "Submit"}
-                  sx={{ width: "179px", height: "56px" }}
+                  label={movieId ? t("update") : t("submit")}
+                  sx={{ width: "182px", height: "56px" }}
                 />
               </Box>
-            </Box>
-          </form>
-        </Box>
-      ) : (
-        <Box className="manage-movie-mobile">
-          <Typography
-            component="div"
-            sx={{
-              fontSize: theme.typography.h3.fontSize,
-              lineHeight: theme.typography.h3.lineHeight,
-            }}
-            className="title"
-          >
-            {movieId ? "Edit" : "Create a New Movie"}
-          </Typography>
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="manage-movie-mobile-form"
-          >
-            <Input
-              label="Title"
-              type="string"
-              name="title"
-              value={movie ? movie.title : ""}
-              control={control}
-              register={register}
-              required
-              sx={{ width: "100%" }}
-            />
-            <Input
-              label="Publishing Year"
-              type="number"
-              name="year"
-              value={movie ? movie.year : ""}
-              control={control}
-              register={register}
-              required
-              sx={{ width: "100%" }}
-            />
-            <ImageUpload
-              onFileSelect={handleFileSelect}
-              initialImage={
-                movieId && movie
-                  ? backend_url + "/uploads/posters/" + movie.poster
-                  : undefined
-              }
-            />
-            <Box className="button-group">
-              <ButtonComponent
-                type="button"
-                label="Cancel"
-                outlined
-                onClick={onCancel}
-                sx={{ width: "182px", height: "56px" }}
-              />
-              <ButtonComponent
-                type="submit"
-                label={movieId ? "Update" : "Submit"}
-                sx={{ width: "182px", height: "56px" }}
-              />
-            </Box>
-          </form>
-        </Box>
-      )}
-    </Box>
+            </form>
+          </Box>
+        )}
+      </Box>
+    </Layout>
   );
 };
 

@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import React from "react";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ const Layout = ({ children }: LayoutProps) => {
       >
         {children}
       </Box>
+      <LanguageSwitcher />
 
       <Box className="background-image">
         <img

@@ -1,0 +1,22 @@
+{
+  "title": "Title",
+  "year": "Publishing Year",
+  "poster": "Poster",
+  "drop-image": "Drop an image here",
+  "submit": "Submit",
+  "cancel": "Cancel",
+  "update": "Update",
+  "login": "Login",
+  "logout": "Logout",
+  "my-movies": "My movies",
+  "prev": "Prev",
+  "next": "Next",
+  "signin": "Sign in",
+  "email": "Email",
+  "password": "Password",
+  "remember-me": "Remember me",
+  "empty-movie": "Your movie list is empty",
+  "edit": "Edit",
+  "add-movie": "Add a new movie",
+  "create-movie": "Create a New Movie"
+}

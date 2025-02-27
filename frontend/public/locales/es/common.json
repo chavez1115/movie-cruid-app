@@ -1,0 +1,22 @@
+{
+  "title": "Título",
+  "year": "Año de publicación",
+  "poster": "Póster",
+  "drop-image": "Suelta una imagen aquí",
+  "submit": "Entregar",
+  "cancel": "Cancel",
+  "update": "Cancelar",
+  "login": "Acceso",
+  "logout": "Cerrar sesión",
+  "my-movies": "Mis peliculas",
+  "prev": "Anterior",
+  "next": "Próxima",
+  "signin": "Iniciar sesión",
+  "email": "Correo electrónico",
+  "password": "Contraseña",
+  "remember-me": "Acuérdate de mí",
+  "empty-movie": "Tu lista de películas está vacía",
+  "edit": "Editar",
+  "add-movie": "Agregar una nueva película",
+  "create-movie": "Crear una nueva película"
+}

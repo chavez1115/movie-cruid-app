@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useAuth } from "@/contexts/AuthContext";
 import Layout from "@/components/Layout";
 import { Box, Grid, Typography, useTheme } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const MovieList = () => {
   const { user, signOut } = useAuth();
@@ -19,6 +20,7 @@ const MovieList = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 1035);
   const router = useRouter();
   const theme = useTheme();
+  const { t } = useTranslation("common");
   const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   useEffect(() => {
@@ -144,7 +146,7 @@ const MovieList = () => {
               }}
               className="title"
             >
-              My movies
+              {t("my-movies")}
               <Box component="section" className="icon-container">
                 <Box
                   component="img"
@@ -161,7 +163,7 @@ const MovieList = () => {
           </Box>
           <Box className="right-section">
             <span className="logout-button" onClick={handleLogOut}>
-              {!isMobile && "Logout"}
+              {!isMobile && t("logout")}
               <span className="icon-container">
                 <Box
                   component="img"
@@ -204,7 +206,7 @@ const MovieList = () => {
                 sx={{
                   display: { xs: "none", sm: "flex" },
                   justifyContent: "center",
-                  marginTop: '80px',
+                  marginTop: "80px",
                 }}
               >
                 <button
@@ -216,7 +218,7 @@ const MovieList = () => {
                     cursor: currentPage === 1 ? "not-allowed" : "pointer",
                   }}
                 >
-                  Prev
+                  {t("prev")}
                 </button>
                 {pageNumbers.map((page, index) => (
                   <button
@@ -244,7 +246,7 @@ const MovieList = () => {
                       currentPage === totalPages ? "not-allowed" : "pointer",
                   }}
                 >
-                  Next
+                  {t("next")}
                 </button>
               </Box>
             )}
@@ -268,11 +270,11 @@ const MovieList = () => {
               }}
               className="title"
             >
-              Your movie list is empty
+              {t("empty-movie")}
             </Typography>
             <ButtonComponent
               onClick={handleCreateMovie}
-              label="Add a new movie"
+              label={t("add-movie")}
               sx={{
                 width: { sm: "202px", xs: "380px" },
                 height: "56px",
